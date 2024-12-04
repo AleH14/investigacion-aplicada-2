@@ -1,17 +1,18 @@
 const express = require('express');
 const dbconnect = require('./config');
-const userRouter = require('./users/router');
-const app = express()
+const authRoutes = require('./routes/authRoutes.js');
 
-const router = express.Router()
+const app = express()
 
 app.use(express.json())
 
-app.use('/api', userRouter)
+// conectar a bd
+dbconnect()
 
+// accede a /api y redirecciona a rutas de "authRoutes"
+app.use('/api', authRoutes)
 
+// inciar servidor
 app.listen(3001, () => {
     console.log('servidor en el puerto 3001');
 })
-
-dbconnect()

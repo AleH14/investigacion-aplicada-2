@@ -1,0 +1,12 @@
+
+MONGO_URI ="mongodb://DireccionPuertodeMongo/api_users"
+
+JWT_SECRET='se tiene que crear un JWT_SECRET pegando el comando en la terminal y copiando la respuesta'
+
+/**
+ * 
+ * comando a pegar en la terminal:
+ * 
+ * node -e "console.log(require('crypto').randomBytes(32).toString('hex'))
+ * 
+ */
