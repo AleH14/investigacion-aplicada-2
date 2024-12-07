@@ -1,6 +1,6 @@
 const User = require('../model/userModel.js')
 const jwt = require('jsonwebtoken')
-const protect = require('../middleware/authMiddleware.js')
+const { blockedTokens } = require('../middleware/authMiddleware.js')
 
 // registrar usuario
 const register = async (req, res) => {
@@ -29,7 +29,6 @@ const login = async (req, res) => {
             return res.status(401).json({ message: "Credenciales incorrectas" });
         }
 
-       // si coinciden las credenciales se crea un token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).json({ token });
     } catch (error) {
@@ -39,12 +38,16 @@ const login = async (req, res) => {
 
 // acceder a un recurso (algo de productos por ejemplo)
 const access = (req, res) => {
-    res.status(200).json([response = { message: "Usuario válido"}, data = req.user])
+    res.status(200).json({ message: "Usuario válido", data: req.user })
 }
 
-// cerrar sesion
-const logout = (req, res) => {    
-    res.status(200).json({ message: "Sesión cerrada correctamente" })
+// cerrar sesión
+const logout = (req, res) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader.split(' ')[1];
+
+    blockedTokens.push(token);
+    return res.status(200).send({ message: "Cierre de sesión exitoso" });
 }
 
-module.exports = {register, login, access, logout}
+module.exports = { register, login, access, logout }
