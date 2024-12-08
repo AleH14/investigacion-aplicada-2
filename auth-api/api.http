@@ -1,0 +1,28 @@
+### Register
+POST http://localhost:3001/api/register
+Content-Type: application/json
+
+{
+    "username": "diciembre",
+    "email": "noviembre@octubre.com",
+    "password": "septiembre"
+}
+
+### Login
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+    "username": "diciembre",
+    "email": "noviembre@octubre.com",
+    "password": "septiembre"
+}
+
+### Autorizacion a recursos protegidos
+GET http://localhost:3001/api/protected-resource
+Authorization: Bearer this-is-not-a-token
+
+### Logout
+POST http://localhost:3001/api/logout
+Content-Type: application/json
+Authorization: Bearer this-is-not-a-token
