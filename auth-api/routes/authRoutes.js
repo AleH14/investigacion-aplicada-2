@@ -1,6 +1,6 @@
 const express = require('express')
-const {register, login, access, logout} = require('../controllers/authController.js')
-const protect = require('../middleware/authMiddleware.js')
+const { register, login, access, logout } = require('../controllers/authController.js')
+const { protect } = require('../middleware/authMiddleware.js')
 
 const authRoutes = express.Router()
 
@@ -13,6 +13,7 @@ authRoutes.post("/login", login)
 // verifica token con protect y accede a access si es aprobado
 authRoutes.get("/protected-resource", protect, access)
 
-//logout
+// logout
+authRoutes.post("/logout", protect, logout)
 
 module.exports = authRoutes
