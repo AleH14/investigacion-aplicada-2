@@ -5,7 +5,7 @@
 
 1. Clona el repositorio:
     ```sh
-    git clone https://github.com/tu-usuario/auth-api.git
+    git clone https://github.com/AleH14/investigacion-aplicada-2.git
     ```
 
 2. Navega al directorio del proyecto:
